@@ -9,9 +9,7 @@ function appendDivsTo(numberOfDivs, parentElement) {
 }
 
 function createGrid(grid, rows, columns) {
-    appendDivsTo(rows, grid);
-    const gridRows = grid.childNodes;
-    gridRows.forEach(row => appendDivsTo(columns, row));
+    appendDivsTo(rows*columns, grid);
 }
 
 function addClassToChildren(parentElement, tagName) {
@@ -19,10 +17,17 @@ function addClassToChildren(parentElement, tagName) {
 }
 
 function addTagsToGrid(grid) {
-    addClassToChildren(grid, "grid-row");
-    grid.childNodes.forEach(row => addClassToChildren(row, "cell"));
+    addClassToChildren(grid, "cell");
 }
 
 // grid creation
 createGrid(grid, 16, 16);
 addTagsToGrid(grid);
+
+let cells = document.querySelectorAll(".cell");
+
+function paintCell() {
+    this.classList.add("painted");
+}
+
+cells.forEach(cell => cell.addEventListener("click", paintCell));
